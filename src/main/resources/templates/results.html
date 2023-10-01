@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/xhtml" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>SearchResults</title>
+    <style>
+        .search-container {
+            position: fixed;
+            display: flex;
+            top: 0;
+            left: 0;
+            width: 100%;
+            align-items: center;
+            margin-bottom: 15px;
+            z-index: 999; /* set a high z-index to make it appear above other elements */
+
+            /*border-bottom: 2px solid black;*/
+            border-bottom: 0 ;
+            border-top: 5px solid black;
+        }
+
+        body, .container, .search-container, div {
+            background-color: #2a2828;
+            color: white;
+        }
+
+        .search-container input[type="text"] {
+
+            margin-bottom: 2px;
+            margin-left: 15PX;
+            padding: 10px;
+            width: 800px;
+            border: none;
+            border-radius: 20PX;
+            outline: none;
+            font-size: 16px;
+            margin-right: 10px;
+
+        }
+
+        .search-container button[type="submit"] {
+            padding: 10px;
+            border: none;
+            margin-top: 2px;
+            margin-bottom: 2px;
+
+            border-radius: 20px;
+            cursor: pointer;
+            background-color: #7203ea;
+            color: white;
+            font-size: 16px;
+            font-weight: bold;
+        }
+
+        .search-container button[type="submit"]:hover {
+            background-color: #7203ea;
+        }
+
+        .container-list {
+            display: flex;
+            flex-direction: column;
+            overflow: auto;
+            height: auto;
+            background-color: black;
+
+        }
+
+        .container {
+
+            display: block;
+            width: auto;
+            padding: 10px 10px 2px 10px;
+            background-color: white;
+            box-shadow: 0 0 10px 1px rgba(0, 0, 0, 0.1);
+            border-radius: 5px;
+            border-bottom: 4px solid #ccc;
+            margin-bottom: 20px;
+        }
+
+        h1 {
+            cursor: pointer;
+            margin: 0 0 5px 0;
+            color: black;
+            font-style: italic;
+            font-size: 20px;
+            font-weight: bold;
+            font-family: "Times New Roman", Times, serif;
+        }
+
+        h2 {
+            margin: 0;
+            color: blue;
+            font-style: italic;
+            text-decoration: underline;
+            font-size: 16px;
+            font-weight: bold;
+            font-family: "Times New Roman", Times, serif;
+        }
+
+        /* Change the color of visited links */
+        a:visited {
+            color: purple;
+        }
+
+        p {
+            color: black;
+            font-size: 12px;
+            font-family: Arial, sans-serif;
+        }
+    </style>
+</head>
+<body>
+<form action="/search" method="get">
+    <div class="search-container">
+        <label>
+            <input type="text" name="q" placeholder="Search...">
+            <input type="hidden" name="page" value="1">
+        </label>
+        <button type="submit">Search</button>
+    </div>
+</form>
+<h1>Results</h1>
+<div id="container-list">
+    <div th:each="object : ${persons}" class="container">
+        <a th:href="|${object.l}|"><h2 th:text="${object.h}"></h2></a>
+        <p th:utext="${object.p}"></p>
+    </div>
+</div>
+</body>
+</html>

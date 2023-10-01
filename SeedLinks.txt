@@ -1,0 +1,2 @@
+https://weather.com/?Goto=Redirected
+https://www.wikipedia.org/
